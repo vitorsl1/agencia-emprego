@@ -1,6 +1,21 @@
 <?php
-$base = rtrim(dirname(dirname($_SERVER['PHP_SELF'])), '/');
-if ($base === '/' || $base === '\\') $base = '';
+// Caminho base fixo — ajuste conforme a estrutura no servidor
+// Exemplo: se o site está em /agencia/agencia-emprego-main, defina assim:
+if (!defined('BASE')) {
+    // Detecta automaticamente a raiz do projeto (onde está o index.php)
+    $docRoot = str_replace('\\', '/', $_SERVER['DOCUMENT_ROOT']);
+    $scriptDir = str_replace('\\', '/', dirname($_SERVER['SCRIPT_FILENAME']));
+
+    // Sobe até encontrar o index.php (raiz do projeto)
+    $dir = $scriptDir;
+    while (!file_exists($dir . '/index.php') && $dir !== $docRoot && strlen($dir) > strlen($docRoot)) {
+        $dir = dirname($dir);
+    }
+
+    $base = str_replace($docRoot, '', $dir);
+    $base = rtrim($base, '/');
+    define('BASE', $base);
+}
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -25,7 +40,7 @@ if ($base === '/' || $base === '\\') $base = '';
 <body>
 <nav class="navbar navbar-expand-lg navbar-dark mb-4">
     <div class="container">
-        <a class="navbar-brand fw-bold" href="<?php echo $base; ?>/index.php">
+        <a class="navbar-brand fw-bold" href="<?php echo BASE; ?>/index.php">
             <i class="bi bi-building"></i> Agência de Emprego
             <span>Sistema de Gestão</span>
         </a>
@@ -35,16 +50,16 @@ if ($base === '/' || $base === '\\') $base = '';
         <div class="collapse navbar-collapse" id="navMenu">
             <ul class="navbar-nav ms-auto gap-1">
                 <li class="nav-item">
-                    <a class="nav-link text-white" href="<?php echo $base; ?>/index.php"><i class="bi bi-house-fill"></i> Início</a>
+                    <a class="nav-link text-white" href="<?php echo BASE; ?>/index.php"><i class="bi bi-house-fill"></i> Início</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-white" href="<?php echo $base; ?>/profissionais/listar.php"><i class="bi bi-person-badge-fill"></i> Profissionais</a>
+                    <a class="nav-link text-white" href="<?php echo BASE; ?>/profissionais/listar.php"><i class="bi bi-person-badge-fill"></i> Profissionais</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-white" href="<?php echo $base; ?>/empresas/listar.php"><i class="bi bi-building-fill"></i> Empresas</a>
+                    <a class="nav-link text-white" href="<?php echo BASE; ?>/empresas/listar.php"><i class="bi bi-building-fill"></i> Empresas</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-white" href="<?php echo $base; ?>/contratos/listar.php"><i class="bi bi-file-text-fill"></i> Contratos</a>
+                    <a class="nav-link text-white" href="<?php echo BASE; ?>/contratos/listar.php"><i class="bi bi-file-text-fill"></i> Contratos</a>
                 </li>
             </ul>
         </div>
