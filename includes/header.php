@@ -1,5 +1,4 @@
 <?php
-// Detecta o caminho base automaticamente
 $base = rtrim(dirname(dirname($_SERVER['PHP_SELF'])), '/');
 if ($base === '/' || $base === '\\') $base = '';
 ?>
@@ -9,52 +8,46 @@ if ($base === '/' || $base === '\\') $base = '';
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Agência de Emprego Temporário</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #f0f2f5; color: #333; }
-        header { background: linear-gradient(135deg, #1a237e, #283593); color: white; padding: 15px 0; box-shadow: 0 2px 8px rgba(0,0,0,0.3); }
-        header .container { display: flex; align-items: center; justify-content: space-between; max-width: 1100px; margin: 0 auto; padding: 0 20px; }
-        header h1 { font-size: 1.4em; letter-spacing: 1px; }
-        header h1 span { font-size: 0.7em; display: block; font-weight: 300; opacity: 0.85; }
-        nav { display: flex; gap: 8px; flex-wrap: wrap; }
-        nav a { color: white; text-decoration: none; padding: 7px 15px; border-radius: 20px; font-size: 0.88em; background: rgba(255,255,255,0.12); transition: background 0.2s; }
-        nav a:hover { background: rgba(255,255,255,0.28); }
-        .container { max-width: 1100px; margin: 30px auto; padding: 0 20px; }
-        .card { background: white; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.08); padding: 30px; margin-bottom: 25px; }
-        h2 { color: #1a237e; margin-bottom: 20px; font-size: 1.3em; border-bottom: 2px solid #e8eaf6; padding-bottom: 10px; }
-        table { width: 100%; border-collapse: collapse; font-size: 0.93em; }
-        th { background: #1a237e; color: white; padding: 11px 14px; text-align: left; }
-        td { padding: 10px 14px; border-bottom: 1px solid #eee; }
-        tr:hover td { background: #f5f5ff; }
-        .btn { display: inline-block; padding: 8px 18px; border-radius: 6px; text-decoration: none; font-size: 0.88em; cursor: pointer; border: none; transition: opacity 0.2s; }
-        .btn:hover { opacity: 0.85; }
-        .btn-primary { background: #1a237e; color: white; }
-        .btn-success { background: #2e7d32; color: white; }
-        .btn-warning { background: #f57f17; color: white; }
-        .btn-danger { background: #c62828; color: white; }
-        .btn-sm { padding: 5px 12px; font-size: 0.82em; }
-        form label { display: block; margin-bottom: 5px; font-weight: 600; font-size: 0.9em; color: #555; }
-        form input, form select { width: 100%; padding: 9px 12px; border: 1px solid #ccc; border-radius: 6px; font-size: 0.93em; margin-bottom: 15px; outline: none; transition: border 0.2s; }
-        form input:focus, form select:focus { border-color: #1a237e; }
-        .form-row { display: flex; gap: 20px; flex-wrap: wrap; }
-        .form-row .form-group { flex: 1; min-width: 200px; }
-        .alert { padding: 12px 18px; border-radius: 6px; margin-bottom: 18px; font-size: 0.93em; }
-        .alert-success { background: #e8f5e9; color: #2e7d32; border-left: 4px solid #2e7d32; }
-        .alert-danger { background: #ffebee; color: #c62828; border-left: 4px solid #c62828; }
-        .badge { display: inline-block; padding: 3px 10px; border-radius: 12px; font-size: 0.78em; font-weight: 600; }
-        .badge-blue { background: #e8eaf6; color: #1a237e; }
+        body { background: #f0f2f5; }
+        .navbar { background: linear-gradient(135deg, #1a237e, #283593) !important; }
+        .navbar-brand span { font-size: 0.65em; display: block; font-weight: 300; opacity: 0.85; }
+        .card { border: none; border-radius: 12px; box-shadow: 0 2px 12px rgba(0,0,0,0.08); }
+        .card-header { background: #1a237e; color: white; border-radius: 12px 12px 0 0 !important; }
+        .table thead th { background: #1a237e; color: white; border: none; }
+        .table tbody tr:hover { background: #f5f5ff; }
+        .badge-cpf { background: #e8eaf6; color: #1a237e; font-size: 0.85em; }
+        footer { background: white; border-top: 1px solid #e0e0e0; }
     </style>
 </head>
 <body>
-<header>
+<nav class="navbar navbar-expand-lg navbar-dark mb-4">
     <div class="container">
-        <h1>🏢 Agência de Emprego <span>Sistema de Gestão</span></h1>
-        <nav>
-            <a href="<?php echo $base; ?>/index.php">🏠 Início</a>
-            <a href="<?php echo $base; ?>/profissionais/listar.php">👷 Profissionais</a>
-            <a href="<?php echo $base; ?>/empresas/listar.php">🏭 Empresas</a>
-            <a href="<?php echo $base; ?>/contratos/listar.php">📋 Contratos</a>
-        </nav>
+        <a class="navbar-brand fw-bold" href="<?php echo $base; ?>/index.php">
+            <i class="bi bi-building"></i> Agência de Emprego
+            <span>Sistema de Gestão</span>
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navMenu">
+            <ul class="navbar-nav ms-auto gap-1">
+                <li class="nav-item">
+                    <a class="nav-link text-white" href="<?php echo $base; ?>/index.php"><i class="bi bi-house-fill"></i> Início</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white" href="<?php echo $base; ?>/profissionais/listar.php"><i class="bi bi-person-badge-fill"></i> Profissionais</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white" href="<?php echo $base; ?>/empresas/listar.php"><i class="bi bi-building-fill"></i> Empresas</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white" href="<?php echo $base; ?>/contratos/listar.php"><i class="bi bi-file-text-fill"></i> Contratos</a>
+                </li>
+            </ul>
+        </div>
     </div>
-</header>
+</nav>
 <div class="container">
