@@ -35,7 +35,7 @@ class AppGUI:
         notebook.add(self.tela_contratos, text="Contratos")
         notebook.add(self.tela_historico, text="Histórico")
 
-        def ao_mudar_aba(_):
+        def ao_mudar_aba(event):
             self.tela_profissionais.atualizar_lista()
             self.tela_empresas.atualizar_lista()
             self.tela_contratos._carregar_comboboxes()

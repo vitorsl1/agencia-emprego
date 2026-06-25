@@ -32,14 +32,14 @@ class TelaEmpresas(ttk.Frame):
     def _abrir_form(self, empresa=None):
         top = tk.Toplevel(self)
         top.title("Empresa")
-        labels = ["CNPJ", "Razão Social", "Endereço"]
+        field_names = ["CNPJ", "Razão Social", "Endereço"]
         vals = {
             "CNPJ": empresa.cnpj if empresa else "",
             "Razão Social": empresa.razao_social if empresa else "",
             "Endereço": empresa.endereco if empresa else "",
         }
         entries = {}
-        for idx, label in enumerate(labels):
+        for idx, label in enumerate(field_names):
             ttk.Label(top, text=label).grid(row=idx, column=0, padx=6, pady=4, sticky="w")
             ent = ttk.Entry(top, width=40)
             ent.insert(0, vals[label])

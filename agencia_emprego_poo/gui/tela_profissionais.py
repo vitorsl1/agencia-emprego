@@ -38,7 +38,7 @@ class TelaProfissionais(ttk.Frame):
     def _abrir_form(self, profissional=None):
         top = tk.Toplevel(self)
         top.title("Profissional")
-        labels = ["CPF", "Nome", "Profissão", "Data Nascimento", "Endereço"]
+        field_names = ["CPF", "Nome", "Profissão", "Data Nascimento", "Endereço"]
         vals = {
             "CPF": profissional.cpf if profissional else "",
             "Nome": profissional.nome if profissional else "",
@@ -47,7 +47,7 @@ class TelaProfissionais(ttk.Frame):
             "Endereço": profissional.endereco if profissional else "",
         }
         entries = {}
-        for idx, label in enumerate(labels):
+        for idx, label in enumerate(field_names):
             ttk.Label(top, text=label).grid(row=idx, column=0, padx=6, pady=4, sticky="w")
             ent = ttk.Entry(top, width=40)
             ent.insert(0, vals[label])
