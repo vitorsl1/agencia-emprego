@@ -1,3 +1,8 @@
+<?php
+// Detecta o caminho base automaticamente
+$base = rtrim(dirname(dirname($_SERVER['PHP_SELF'])), '/');
+if ($base === '/' || $base === '\\') $base = '';
+?>
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -45,10 +50,10 @@
     <div class="container">
         <h1>🏢 Agência de Emprego <span>Sistema de Gestão</span></h1>
         <nav>
-            <a href="/index.php">🏠 Início</a>
-            <a href="/profissionais/listar.php">👷 Profissionais</a>
-            <a href="/empresas/listar.php">🏭 Empresas</a>
-            <a href="/contratos/listar.php">📋 Contratos</a>
+            <a href="<?php echo $base; ?>/index.php">🏠 Início</a>
+            <a href="<?php echo $base; ?>/profissionais/listar.php">👷 Profissionais</a>
+            <a href="<?php echo $base; ?>/empresas/listar.php">🏭 Empresas</a>
+            <a href="<?php echo $base; ?>/contratos/listar.php">📋 Contratos</a>
         </nav>
     </div>
 </header>
