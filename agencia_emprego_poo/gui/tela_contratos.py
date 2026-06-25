@@ -2,6 +2,8 @@ from tkinter import messagebox, ttk
 
 from models.contrato import Contrato
 
+ESTIMATIVA_HORAS_MENSAIS = 160
+
 
 class TelaContratos(ttk.Frame):
     def __init__(self, master, agencia):
@@ -60,8 +62,11 @@ class TelaContratos(ttk.Frame):
                 data_termino=self.ent_fim.get().strip(),
                 valor_hora=valor_hora,
             )
-            estimado = contrato.calcular_valor_total(160)
-            if not messagebox.askyesno("Confirmação", f"Valor estimado (160h): R$ {estimado:.2f}. Confirmar?"):
+            estimado = contrato.calcular_valor_total(ESTIMATIVA_HORAS_MENSAIS)
+            if not messagebox.askyesno(
+                "Confirmação",
+                f"Valor estimado ({ESTIMATIVA_HORAS_MENSAIS}h): R$ {estimado:.2f}. Confirmar?",
+            ):
                 return
             numero = self.agencia.registrar_contrato(contrato)
             messagebox.showinfo("Sucesso", f"Contrato #{numero} registrado.")
